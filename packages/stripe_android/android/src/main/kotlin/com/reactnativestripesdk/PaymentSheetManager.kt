@@ -387,6 +387,9 @@ class PaymentSheetManager(
   }
 
   override fun onPresent() {
+    (context.applicationContext as? Application)?.let {
+      PrimaryButtonAccessibilityHelper.ensureAttached(it)
+    }
     keepJsAwake = KeepJsAwakeTask(context).apply { start() }
     if (paymentSheet != null) {
       if (!paymentIntentClientSecret.isNullOrEmpty()) {
